@@ -417,6 +417,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // INIT
   applyBranding();
+  // SCROLL PROGRESS BAR
+  const initScrollProgress = () => {
+    const bar = document.getElementById("scroll-progress");
+    if (!bar) return;
+    window.addEventListener("scroll", () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+      bar.style.width = pct + "%";
+    }, { passive: true });
+  };
+
   injectContent();
   initBookingWidget();
   initFaqAccordion();
@@ -425,5 +436,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initCountdown();
   initSocialProof();
   initCallButton();
+  initScrollProgress();
   document.getElementById("current-year").textContent = new Date().getFullYear();
 });
